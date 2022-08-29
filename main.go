@@ -23,6 +23,9 @@ func getUsers(c *gin.Context) {
 
 func postUsers(c *gin.Context) {
 	var newUser user
+	if err := c.BindJSON(&newUser); err != nil {
+		return
+	}
 
 	users = append(users, newUser)
 	c.IndentedJSON(http.StatusCreated, newUser)
